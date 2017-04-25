@@ -12,6 +12,10 @@ var logger = function(req, res, next) {
 
 app.use(logger);
 
+// View Engine - EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 
 // Middleware - uusing the Body Parser.  Look up this stuff in the documentation for body parser
 app.use(bodyParser.json()); // to parse JSON in HTTP body response
@@ -22,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));  // eg.  app.use(expres
 // this would end up serving (public/index.htm), since this comes before the later statement to serve "/" with something else.
 
 // testing parsing JSON object to the browser.
-var people = [
+var numbers = [
     {
         name: 'One',
         age: 1
@@ -35,12 +39,30 @@ var people = [
         name: 'Three',
         age: 3
     }
+];
+
+var userData = [
+    {
+        id: 1,
+        first: 'Dave',
+        last: 'Dee',
+        email: 'test@test.com',
+    },
+    {
+        id: 2,
+        first: 'Zelda',
+        last: 'Zee',
+        email: 'z@test.com',
+    },
 ]
 
 
 app.get('/', function(req, res){
-    res.send('Received your GET request...\n')        // send raw text?
-    //res.json(people);
+    //res.send('Received your GET request...\n')        // send raw text?
+    //res.json(numbers); --> if we want to return JSON data.  Is this how APIs are made??
+    
+    // res.render('index');  // this will render index.ejs.
+    res.render('index', { title: 'Blah!', users: userData })
 })
 
 app.post('/', function(req, res){
