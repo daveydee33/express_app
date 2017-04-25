@@ -11,3 +11,13 @@ My notes...
 
 
 
+
+
+We got the form done.
+And we got validation working! 
+Now i'm leaving off here - committing to git, and will start the MongoDB part next.
+
+
+Next.
+MongoDB
+https://youtu.be/gnsO8-xJ8rs?t=51m22s

@@ -1,5 +1,14 @@
 <% include partials/header %>
 
+        <!-- Check for errors -->
+        <% if(errors != undefined){ %>
+            <ul>
+                <% errors.forEach(function(error){ %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
         <%# Adding a Form! :) %>
         <!-- adding a form -->
         <form method="POST" action="/users/add ">
