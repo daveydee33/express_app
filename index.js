@@ -44,14 +44,14 @@ var numbers = [
 var userData = [
     {
         id: 1,
-        first: 'Dave',
-        last: 'Dee',
+        first_name: 'Dave',
+        last_name: 'Dee',
         email: 'test@test.com',
     },
     {
         id: 2,
-        first: 'Zelda',
-        last: 'Zee',
+        first_name: 'Zelda',
+        last_name: 'Zee',
         email: 'z@test.com',
     },
 ]
@@ -67,6 +67,16 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
     res.send('Received your POST request...\n')
+})
+
+app.post('/users/add', function(req, res){
+    var newUser = {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+    }
+    console.log(newUser);
+    res.send("Received input for: " + req.body.first_name);
 })
 
 // Set the webserver to listen
