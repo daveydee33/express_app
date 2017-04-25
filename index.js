@@ -98,7 +98,7 @@ app.get('/', function(req, res){
     // find everything (see other examples like sorting by name on MongoJS usage on GitHub page)
     db.users.find(function (err, docs) {
         // docs is an array of all the documents in mycollection
-        console.log(docs)
+        //console.log(docs)
 
         // res.render('index');  // this will render index.ejs.
         res.render('index', { 

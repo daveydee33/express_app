@@ -32,10 +32,12 @@
         <h1>Hello from <%= title %></h1>
 
         <!-- Build a LIST from the 'users' array passed in -->
-        <ul>
-            <% users.forEach(function(blah){ %>
-                <li><%= blah.first_name %> -- <b><%= blah.last_name %></b></li>
-            <% }) %>
-        </ul>
+        <% if(users != undefined){ %>
+            <ul>
+                <% users.forEach(function(blah){ %>
+                    <li><%= blah.first_name %> -- <b><%= blah.last_name %></b></li>
+                <% }) %> 
+            </ul>
+        <% } %>
 
 <% include partials/footer %>

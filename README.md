@@ -1,5 +1,20 @@
 My notes...
 
+# Current status and issues
+
+I need to fix the `index.js` file.
+
+* I can remove the "userDataSample" stuff now if i'm going to be using the MongoDB - but should keep it in there for using when the DB isn't installed or available.  Load sample data.
+* I've got a problem when calling the /add/users stuff because it still loads the dummy data.
+* I've got that call to the /add/users in there twice.. i shouldn't be duplicating this.
+
+
+
+
+
+
+
+
 * [ExpressJS Crash Course (Traversy Media)](https://www.youtube.com/watch?v=gnsO8-xJ8rs&index=9&list=PLillGF-RfqbYeckUaD1z6nviTp31GLTH8)
 
 # Install
