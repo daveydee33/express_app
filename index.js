@@ -2,6 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');    // for forms ?  Body Parser - Node.js body parsing middle ware.  https://github.com/expressjs/body-parser
 var path = require('path');     // core module.  to simplify file paths.
 var expressValidator = require('express-validator');  // To validate form data.  see: https://github.com/ctavan/express-validator
+var mongojs = require('mongojs')
+
+var db = mongojs('customerapp', ['users']); // need to replace 'customerapp' with a full connection string if elsewhere.  and 'users' is the colelction.  
+// https://youtu.be/gnsO8-xJ8rs?t=57m7s
+// https://github.com/mafintosh/mongojs
 
 var app = express();
 
@@ -89,12 +94,21 @@ var userData = [
 app.get('/', function(req, res){
     //res.send('Received your GET request...\n')        // send raw text?
     //res.json(numbers); --> if we want to return JSON data.  Is this how APIs are made??
-    
-    // res.render('index');  // this will render index.ejs.
-    res.render('index', { 
-        title: 'Blah!', 
-        users: userData,
+
+    // find everything (see other examples like sorting by name on MongoJS usage on GitHub page)
+    db.users.find(function (err, docs) {
+        // docs is an array of all the documents in mycollection
+        console.log(docs)
+
+        // res.render('index');  // this will render index.ejs.
+        res.render('index', { 
+            title: 'Blah!', 
+            users: userData, // this was the sample data defined above in this file.  now replacing it with the data retrieved from MongoDB.
+            users: docs
+        })
     })
+    
+
 })
 
 app.post('/', function(req, res){
@@ -137,6 +151,24 @@ app.post('/users/add', function(req, res){
         }
         console.log(newUser);
         
+        // Now insert the user into MongoDB
+        // eg, db.collection.insert(docOrDocs, [callback])   -- Said callback receives (err, documents)
+        db.users.insert(newUser, function(err, result){
+            if (err){
+                console.log("Error---->");
+                console.log(err);
+                console.log("<--------")
+            }
+
+            // console.log(result); // this would end up being something like:
+            // { first_name: 'iii',
+            //   last_name: 'iii',
+            //   email: 'iii',
+            //   _id: 58ff1ffe60c259462a660c0d }
+
+            res.redirect('/');
+        })
+
         //res.send("Received input for: " + req.body.first_name);
 
 
